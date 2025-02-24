@@ -17,6 +17,7 @@ constructor(@InjectModel(Order.name) private orderSchema: Model<OrderDocument>) 
         type: createOrderDto.type,
         shares: createOrderDto.shares,
         partial: createOrderDto.shares,
+        price: createOrderDto.price,
         status: OrderStatus.PENDING
       });
     }catch(err){
