@@ -15,7 +15,8 @@ export class WalletsController {
 
   @Get()
   async findAll() {
-    return await this.walletsService.findAll();
+    const wallets = await this.walletsService.findAll();
+    return wallets.map(wallet => new WalletPresenter(wallet));
   }
 
   @Get(':id')

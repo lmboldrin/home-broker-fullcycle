@@ -85,15 +85,15 @@ GET http://localhost:3000/wallets
 
 ###
 
-GET http://localhost:3000/wallets/bf7b12d3-3c62-495e-9929-bf475ef5cd0c
+GET http://localhost:3000/wallets/4409850d-0330-418a-8b9c-7e8c4ed77bdc
 
 
 ###
-POST http://localhost:3000/wallets/{{ walletId }}/assets
+POST http://localhost:3000/wallets/4409850d-0330-418a-8b9c-7e8c4ed77bdc/assets
 Content-Type: application/json
 
 {
-  "assetId": "{{ assetId }}",
+  "assetId": "dbf9eedd-9468-4c68-836b-e8f9bf085249",
   "shares": 10
 }
 
@@ -103,11 +103,11 @@ Content-Type: application/json
 
 {
   "walletId": "{{ walletId }}",
-  "assetId": "{{ assetId }}",
+  "assetId": "dbf9eedd-9468-4c68-836b-e8f9bf085249",
   "shares": 10,
   "price": 100,
   "type": "BUY"
 }
 
 ###
-GET http://localhost:3000/orders?walletId={{ walletId }}
+GET http://localhost:3000/orders?walletId=4409850d-0330-418a-8b9c-7e8c4ed77bdc

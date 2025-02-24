@@ -3,6 +3,7 @@ import { CreateOrderDto } from './dto/create-order.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Order, OrderDocument, OrderStatus } from './entities/order.entity';
 import { Model } from 'mongoose';
+import { Asset } from 'src/assets/entities/asset.entity';
 
 @Injectable()
 export class OrdersService {
@@ -28,15 +29,12 @@ constructor(@InjectModel(Order.name) private orderSchema: Model<OrderDocument>) 
   }
 
   async findAll(filter: { walletId: string }) {
-    const orders = await this.orderSchema.find({wallet: filter.walletId});
-    if (!orders.length) {
-      throw new HttpException('Nenhuma ordem encontrada.', HttpStatus.NOT_FOUND);
-    }
+    const orders = this.orderSchema.find({wallet: filter.walletId}).populate('asset') as Promise<(Order & {asset: Asset})[]>;
     return orders;
   }
 
   async findOne(id: string) {
-    const order = await this.orderSchema.findById(id);
+    const order = await this.orderSchema.findById(id).populate('asset') as (Order & {asset: Asset});
     if (!order) {
       throw new HttpException(
         'Não foi encontrado uma ordem com o id informado.',

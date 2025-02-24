@@ -26,7 +26,7 @@ export class WalletsService {
   }
 
   async findAll() {
-    const existingWallets = await this.walletSchema.find();
+    const existingWallets = await this.walletSchema.find().populate([{ path: 'assets', populate: ['asset'] }]) as (Wallet & { assets: (WalletAsset & { asset: Asset })[] })[];
     if (!existingWallets.length) {
       throw new HttpException('Nenhuma wallet encontrada.', HttpStatus.NOT_FOUND);
     }
