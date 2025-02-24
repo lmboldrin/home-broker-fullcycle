@@ -1,0 +1,62 @@
+
+###
+# @name createAsset
+POST http://localhost:3000/assets
+Content-Type: application/json
+
+{
+  "name": "Nvidia",
+  "price": 1000,
+  "symbol": "NVDA",
+  "image": "NVDA.png"
+}
+
+###
+@assetId = {{ createAsset.response.body._id }}
+@assetSymbol = {{ createAsset.response.body.symbol }}
+
+###
+GET http://localhost:3000/assets
+
+###
+
+GET http://localhost:3000/assets/{{ assetSymbol }}
+
+###
+# @name createWallet
+POST http://localhost:3000/wallets
+
+###
+@walletId = {{ createWallet.response.body._id }}
+
+###
+GET http://localhost:3000/wallets
+
+###
+
+GET http://localhost:3000/wallets/bf7b12d3-3c62-495e-9929-bf475ef5cd0c
+
+
+###
+POST http://localhost:3000/wallets/{{ walletId }}/assets
+Content-Type: application/json
+
+{
+  "assetId": "{{ assetId }}",
+  "shares": 10
+}
+
+###
+POST http://localhost:3000/orders
+Content-Type: application/json
+
+{
+  "walletId": "{{ walletId }}",
+  "assetId": "{{ assetId }}",
+  "shares": 10,
+  "price": 100,
+  "type": "BUY"
+}
+
+###
+GET http://localhost:3000/orders?walletId={{ walletId }}
