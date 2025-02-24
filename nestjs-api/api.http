@@ -11,6 +11,57 @@ Content-Type: application/json
   "image": "NVDA.png"
 }
 
+
+
+###
+POST http://localhost:3000/assets
+Content-Type: application/json
+
+[
+  {
+  "name": "Amazon",
+  "price": 100,
+  "symbol": "AMZN",
+  "image": "AMZN.png"
+  },
+  {
+  "name": "Sales Force",
+  "price": 200,
+  "symbol": "CRM",
+  "image": "CRM.png"
+  },
+  {
+    "name": "Google",
+    "price": 320,
+    "symbol": "GOOGL",
+    "image": "GOOGL.png"
+  },
+  {
+    "name": "Coca-Cola",
+    "price": 700,
+    "symbol": "KO",
+    "image": "KO.png"
+  },
+  {
+    "name": "McDonalds",
+    "price": 450,
+    "symbol": "MCD",
+    "image": "MCD.png"
+  },
+  {
+    "name": "Mercado Livre",
+    "price": 550,
+    "symbol": "MELI",
+    "image": "MELI.png"
+  },
+  {
+    "name": "Meta",
+    "price": 850,
+    "symbol": "META",
+    "image": "META.png"
+  }
+]
+
 ###
 @assetId = {{ createAsset.response.body._id }}
 @assetSymbol = {{ createAsset.response.body.symbol }}

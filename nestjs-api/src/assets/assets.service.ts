@@ -25,6 +25,26 @@ export class AssetsService {
       );
     }
   }
+  
+  async createRange(createAssetDto: CreateAssetDto[]) {
+    for (const assetDto of createAssetDto) {
+      const existingAsset = await this.assetSchema.findOne({
+        symbol: assetDto.symbol,
+      });
+      if (existingAsset) {
+        throw new HttpException(`Ativo ${assetDto.symbol} já cadastrado`, HttpStatus.CONFLICT);
+      }
+    }
+    try {
+      return await this.assetSchema.insertMany(createAssetDto);
+    } catch (err) {
+      console.log(err);
+      throw new HttpException(
+        'Houve um erro ao criar os ativos',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
+  }
 
   async findAll() {
     const existingAssets = await this.assetSchema.find();

@@ -13,6 +13,12 @@ export class AssetsController {
     return new AssetPresenter(asset)
   }
 
+  @Post()
+  async createRange(@Body() createAssetDto: CreateAssetDto[]) {
+    const asset = await this.assetsService.createRange(createAssetDto);
+    return asset.map(a => new AssetPresenter(a))
+  }
+
   @Get()
   async findAll() {
     const assets =  await this.assetsService.findAll();
