@@ -1,17 +1,17 @@
 import { Asset, Order, Wallet } from "@/models";
 
 export async function getAssets(): Promise<Asset[]> {
-    const response = await fetch(`http://localhost:3000/assets`);
+    const response = await fetch(`http://localhost:3001/assets`);
     return response.json();
   }
 
   export async function getAsset(symbol: string): Promise<Asset> {
-    const response = await fetch(`http://localhost:3000/assets/${symbol}`);
+    const response = await fetch(`http://localhost:3001/assets/${symbol}`);
     return response.json();
   }
 
 export async function getMyWallet(walletId: string): Promise<Wallet | null> {
-    const response = await fetch(`http://localhost:3000/wallets/${walletId}`);
+    const response = await fetch(`http://localhost:3001/wallets/${walletId}`);
 
     if(!response.ok) {
         return null;
@@ -22,7 +22,7 @@ export async function getMyWallet(walletId: string): Promise<Wallet | null> {
 
   export async function getOrders(walletId: string): Promise<Order[]> {
     const response = await fetch(
-      `http://localhost:3000/orders?walletId=${walletId}`
+      `http://localhost:3001/orders?walletId=${walletId}`
     );
     return response.json();
   }
