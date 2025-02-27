@@ -73,6 +73,19 @@ GET http://localhost:3001/assets
 
 GET http://localhost:3001/assets/{{ assetSymbol }}
 
+
+###
+POST http://localhost:3001/assets/NVDA/dailies
+Content-Type: application/json
+
+{
+  "date": "2024-04-01",
+  "price": 700
+}
+
+###
+GET http://localhost:3001/assets/NVDA/dailies
+
 ###
 # @name createWallet
 POST http://localhost:3001/wallets
@@ -85,15 +98,15 @@ GET http://localhost:3001/wallets
 
 ###
 
-GET http://localhost:3001/wallets/4409850d-0330-418a-8b9c-7e8c4ed77bdc
+GET http://localhost:3001/wallets/{{ walletId }}
 
 
 ###
-POST http://localhost:3001/wallets/4409850d-0330-418a-8b9c-7e8c4ed77bdc/assets
+POST http://localhost:3001/wallets/{{ walletId }}/assets
 Content-Type: application/json
 
 {
-  "assetId": "dbf9eedd-9468-4c68-836b-e8f9bf085249",
+  "assetId": "aa89bd57-9d4a-42dd-a6e3-d1f5217d5600",
   "shares": 10
 }
 
@@ -103,11 +116,11 @@ Content-Type: application/json
 
 {
   "walletId": "{{ walletId }}",
-  "assetId": "dbf9eedd-9468-4c68-836b-e8f9bf085249",
+  "assetId": "aa89bd57-9d4a-42dd-a6e3-d1f5217d5600",
   "shares": 10,
   "price": 100,
   "type": "BUY"
 }
 
 ###
-GET http://localhost:3001/orders?walletId=4409850d-0330-418a-8b9c-7e8c4ed77bdc
+GET http://localhost:3001/orders?walletId={{ walletId }}

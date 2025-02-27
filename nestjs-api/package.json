@@ -18,7 +18,7 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "assets-images": "npx serve -l tcp://127.0.0.1 ./assets"
+    "assets-images": "npx serve -l tcp://127.0.0.1:9000 ./assets"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",

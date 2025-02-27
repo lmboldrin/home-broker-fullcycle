@@ -66,7 +66,7 @@ export class AssetsService {
     return existingAsset;
   }
 
-  subscribeEvents() {
+  subscribeNewPriceUpdatedEvents(): Observable<Asset> {
     return new Observable((observer) => {
       this.assetSchema.watch([{
         $match: {
@@ -77,15 +77,14 @@ export class AssetsService {
           fullDocument: 'updateLookup',
           fullDocumentBeforeChange: 'whenAvailable'
         }
-      ).on('change', async (data) => {
-        if (data.fullDocument.price === data.fullDocumentBeforeChange.price) {
-          return;
-        }
-        const asset = await this.assetSchema.findById(data.fullDocument._id);
-        observer.next({
-          event: 'asset-updated',
-          data: asset!
-        })
+      ).on('change', (data) => {
+        void (async () => {
+          if (data.fullDocument.price === data.fullDocumentBeforeChange.price) {
+            return;
+          }
+          const asset = await this.assetSchema.findById(data.fullDocument._id);
+          observer.next(asset!);
+        })();
       });
     });
 
