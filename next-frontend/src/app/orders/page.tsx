@@ -1,16 +1,11 @@
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeadCell,
-  TableRow,
-} from 'flowbite-react';
-import { AssetShow } from '@/components/AssetShow';
-import { OrderTypeBadge } from '@/components/OrderTypeBadge';
-import { OrderStatusBadge } from '@/components/OrderStatusBadge';
 import { WalletList } from '@/components/WalletList';
 import { getMyWallet, getOrders } from '@/queries/queries';
+import { OrderTableBody } from './OrderTableBody';
+import {
+  Table,
+  TableHead,
+  TableHeadCell,
+} from 'flowbite-react';
 
 export default async function OrdersListPage({
   searchParams,
@@ -44,23 +39,7 @@ export default async function OrdersListPage({
             <TableHeadCell>Tipo</TableHeadCell>
             <TableHeadCell>Status</TableHeadCell>
           </TableHead>
-          <TableBody>
-            {orders.map((order, key) => (
-              <TableRow key={key}>
-                <TableCell>
-                  <AssetShow asset={order.asset} />
-                </TableCell>
-                <TableCell>R$ {order.price}</TableCell>
-                <TableCell>{order.shares}</TableCell>
-                <TableCell>
-                  <OrderTypeBadge type={order.type} />
-                </TableCell>
-                <TableCell>
-                  <OrderStatusBadge status={order.status} />
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
+          <OrderTableBody orders={orders} walletId={walletId} />
         </Table>
       </div>
     </div>

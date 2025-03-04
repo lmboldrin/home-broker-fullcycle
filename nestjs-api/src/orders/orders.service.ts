@@ -10,6 +10,7 @@ import { AssetDaily } from 'src/assets/entities/asset-daily.entity';
 import { WalletAsset } from 'src/wallets/entities/wallet-asset.entity';
 import { Trade } from './entities/trade.entity';
 import * as kafkaLib from '@confluentinc/kafka-javascript';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class OrdersService implements OnModuleInit {
@@ -182,5 +183,49 @@ export class OrdersService implements OnModuleInit {
     }
   }
 
+  subscribeOrderListUpdates(): Observable<Order> {
+    return new Observable((observer) => {
+      this.orderSchema.watch([{
+        $match: {
+          $or: [
+            { operationType: 'update' },
+            { operationType: 'replace' }
+          ]
+        }
+      }],
+        {
+          fullDocument: 'updateLookup',
+          fullDocumentBeforeChange: 'whenAvailable'
+        }
+      ).on('change', (data) => {
+        void (async () => {
+          if (data.fullDocumentBeforeChange && data.fullDocument.status === data.fullDocumentBeforeChange.status) {
+            return;
+          }
+          const order = await this.orderSchema.findById(data.fullDocument._id);
+          observer.next(order!);
+        })();
+      });
+    });
+  }
+
+  subscribeOrderCreatedEvents(): Observable<Order> {
+    return new Observable((observer) => {
+      this.orderSchema.watch([{
+        $match: {
+          operationType: 'insert'
+        }
+      }],
+        {
+          fullDocument: 'updateLookup'
+        }
+      ).on('change', (data) => {
+        void (async () => {
+          const order = await this.orderSchema.findById(data.fullDocument._id);
+          observer.next(order!);
+        })();
+      });
+    });
+  }
 }
 

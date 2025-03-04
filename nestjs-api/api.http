@@ -115,11 +115,11 @@ POST http://localhost:3001/orders
 Content-Type: application/json
 
 {
-  "walletId": "{{ walletId }}",
-  "assetId": "00b564b8-b905-48d3-9c65-5eacb5b3e4d2",
+  "walletId": "26af968a-a589-49d5-b5eb-4a7d4e604fdf",
+  "assetId": "37da0fbc-d55f-49cc-87c2-ccb8029a2fc8",
   "shares": 50,
   "price": 100,
-  "type": "SELL"
+  "type": "BUY"
 }
 
 ###
