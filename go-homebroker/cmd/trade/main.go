@@ -24,7 +24,7 @@ func main() {
 	consumerConfig := &ckafka.ConfigMap{
 		"bootstrap.servers": "host.docker.internal:9094",
 		"group.id":          "trade",
-		"auto-offset-reset": "latest",
+		"auto.offset.reset": "latest",
 	}
 
 	producerConfig := &ckafka.ConfigMap{
