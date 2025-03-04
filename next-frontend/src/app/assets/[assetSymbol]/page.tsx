@@ -7,6 +7,8 @@ import { AssetChartComponent } from './AssetChartComponent';
 import { WalletList } from '@/components/WalletList';
 import { getAsset, getAssetDailies, getMyWallet } from '@/queries/queries';
 import { Time } from 'lightweight-charts';
+import { AssetPrice } from './AssetPrice';
+import { AssetSync } from '@/components/AssetSync';
 
 export default async function AssetDashboard({
   params,
@@ -38,7 +40,7 @@ export default async function AssetDashboard({
     <div className="flex flex-col space-y-5 flex-grow">
       <div className="flex flex-col space-y-2">
         <AssetShow asset={asset} />
-        <div className="ml-2 font-bold text-2xl">R$ {asset.price}</div>
+        <AssetPrice asset={asset} />
       </div>
       <div className="grid grid-cols-5 flex-grow gap-2">
         <div className="col-span-2">
@@ -68,6 +70,7 @@ export default async function AssetDashboard({
           <AssetChartComponent asset={asset} data={chartData}/>
         </div>
       </div>
+      <AssetSync assetsSymbols={[assetSymbol]} />
     </div>
   );
 }
