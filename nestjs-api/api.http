@@ -106,8 +106,8 @@ POST http://localhost:3001/wallets/{{ walletId }}/assets
 Content-Type: application/json
 
 {
-  "assetId": "aa89bd57-9d4a-42dd-a6e3-d1f5217d5600",
-  "shares": 10
+  "assetId": "00b564b8-b905-48d3-9c65-5eacb5b3e4d2",
+  "shares": 150
 }
 
 ###
@@ -116,10 +116,10 @@ Content-Type: application/json
 
 {
   "walletId": "{{ walletId }}",
-  "assetId": "aa89bd57-9d4a-42dd-a6e3-d1f5217d5600",
-  "shares": 10,
+  "assetId": "00b564b8-b905-48d3-9c65-5eacb5b3e4d2",
+  "shares": 50,
   "price": 100,
-  "type": "BUY"
+  "type": "SELL"
 }
 
 ###

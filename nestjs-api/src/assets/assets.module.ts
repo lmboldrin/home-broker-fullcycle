@@ -20,5 +20,6 @@ import { AssetDailiesService } from './asset-dalies.service';
   ],
   controllers: [AssetsController, AssetsDailiesController],
   providers: [AssetsService, AssetsGateway, AssetDailiesService],
+  exports: [AssetsService],
 })
 export class AssetsModule {}

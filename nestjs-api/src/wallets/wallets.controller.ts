@@ -30,7 +30,11 @@ export class WalletsController {
   }
 
   @Post(':id/assets')
-  createWalletAsset(@Param('id') id: string, @Body() createWalletAssetDto: CreateWalletAssetDto) {
-    return this.walletsService.createWalletAsset(id, createWalletAssetDto);
+  createWalletAsset(@Param('id') id: string,@Body() body: { assetId: string; shares: number }) {
+    return this.walletsService.createWalletAsset({
+      walletId: id,
+      assetId: body.assetId,
+      shares: body.shares,
+    });
   }
 }

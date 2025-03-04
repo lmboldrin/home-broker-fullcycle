@@ -9,7 +9,8 @@ export type AssetDocument = HydratedDocument<Asset>;
     changeStreamPreAndPostImages: {
       enabled: true
     }
-  }
+  },
+  optimisticConcurrency: true
 })
 export class Asset {
   @Prop({ default: () => crypto.randomUUID() })
